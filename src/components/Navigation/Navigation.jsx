@@ -21,7 +21,7 @@ const Navigation = () => {
           {testRoutes.map(([key, route], index) => {
             return (
               <Link key={key} to={route}>
-                <li>Test {index == 0 ? '' : index + 1}</li>
+                <li>Test {index == 0 ? '' : index}</li>
               </Link>
             );
           })}

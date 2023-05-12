@@ -1,4 +1,4 @@
-import { useRoutes } from 'react-router-dom';
+import { useLocation, useRoutes } from 'react-router-dom';
 
 // layouts
 import TestLayout from '../layouts/TestLayout';
@@ -8,11 +8,13 @@ import { HomePage, TestIndexPage, TestOnePage, TestThreePage, TestTwoPage } from
 
 // config
 import { PATH_TEST, TEST_ONE, TEST_THREE, TEST_TWO } from './paths';
+import { AnimatePresence } from 'framer-motion';
+import React from 'react';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
-  return useRoutes([
+  const elements = useRoutes([
     {
       path: '/',
       element: <HomePage />,
@@ -37,4 +39,7 @@ export default function Router() {
       ],
     },
   ]);
+  const location = useLocation();
+  if (!elements) return null;
+  return <AnimatePresence mode="wait">{React.cloneElement(elements, { key: location.pathname })}</AnimatePresence>;
 }
